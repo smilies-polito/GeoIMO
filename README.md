@@ -146,7 +146,6 @@ If you use this code, please cite:
       primaryClass={cs.CV},
       url={https://arxiv.org/abs/2606.24499}, 
 }
-}
 ```
 
 <!-- TODO: replace with the final venue/DOI once published. -->
