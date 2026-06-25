@@ -1,0 +1,37 @@
+# Large data and container files — never commit these
+*.sif
+*.dat
+*.avi
+*.mp4
+
+# Output directories
+output/
+outputs/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Editor / OS
+.DS_Store
+.vscode/
+*.swp
+*~
+
+# Logs
+*.log
+hpc_log/
+
+# Data folder contents (keep the README, not the data)
+data/*.dat
+data/*.npy

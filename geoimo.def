@@ -1,0 +1,46 @@
+Bootstrap: docker
+From: python:3.11-slim
+
+%labels
+    Project     GeoIMO
+    Description Geometry-Driven Independent Motion Classification for Event Cameras
+    Python      3.11
+
+%help
+    GeoIMO runtime container.
+
+    Build:
+        singularity build --fakeroot geoimo.sif geoimo.def
+
+    Run classification:
+        apptainer exec geoimo.sif python -m geoimo.classify --help
+
+    Run evaluation:
+        apptainer exec geoimo.sif python -m geoimo.evaluate --help
+
+    Quickstart (from repo root):
+        bash quickstart.sh
+
+%post
+    # System libraries required by OpenCV (headless build)
+    apt-get update -qq && apt-get install -y --no-install-recommends \
+        libglib2.0-0 \
+        libgl1 \
+        libgomp1 \
+    && rm -rf /var/lib/apt/lists/*
+
+    # Python dependencies
+    # h5py is required only for the offline MVSEC HDF5 -> Prophesee .dat
+    # preprocessing step (data/MVSEC_prophesee_converter.py); its wheel bundles
+    # its own HDF5 library, so no system HDF5 packages are needed.
+    pip install --no-cache-dir \
+        "numpy==1.26.4" \
+        "opencv-python-headless==4.10.0.84" \
+        "scipy==1.13.1" \
+        "h5py==3.11.0"
+
+%environment
+    # Prevent pip user-site pollution when exec'd without --cleanenv
+    export PYTHONNOUSERSITE=1
+    # Suppress OpenCV Qt/display warnings in headless environments
+    export OPENCV_LOG_LEVEL=ERROR

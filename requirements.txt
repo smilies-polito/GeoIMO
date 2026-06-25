@@ -1,0 +1,5 @@
+numpy>=1.20
+opencv-python-headless>=4.5
+scipy>=1.7
+h5py>=3.0  # only needed for MVSEC HDF5 -> .dat preprocessing (data/MVSEC_prophesee_converter.py)
+# pycocotools  # only needed for third_party/prophesee/psee_evaluator.py (not used by GeoIMO)
